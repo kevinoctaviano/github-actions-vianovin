@@ -1,38 +1,23 @@
-import { createContext, useState } from 'react';
-import CounterApp from './Counter';
-import { Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-//Style
-import './Theme.css';
-
-//Declare component context
-export const ThemeContext = createContext(null);
+import React, { useState } from 'react';
+import './App.css';
+// import Counter from './Counter';
+import FunctionalCounter from './pages/FunctionalCounter';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  let [counter, setCount] = useState(0);
 
-  const toggleTheme = () => {
-    setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
+  let increment = () => {
+    return setCount(counter + 1);
+  };
+
+  let decrement = () => {
+    return setCount(counter - 1);
   };
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className="App" id={theme}>
-        <h2 className="sign">Kevin Octaviano</h2>
-        <CounterApp />
-        <div className="switch">
-          {theme === 'light' ? (
-            <Button onClick={toggleTheme} variant="outline-success">
-              Light Mode
-            </Button>
-          ) : (
-            <Button onClick={toggleTheme} variant="outline-warning">
-              Dark Mode
-            </Button>
-          )}
-        </div>
-      </div>
-    </ThemeContext.Provider>
+    <div className="container">
+      {/* <Counter /> */}
+      <FunctionalCounter count={counter} inc={increment} dec={decrement} />
+    </div>
   );
 }
 
